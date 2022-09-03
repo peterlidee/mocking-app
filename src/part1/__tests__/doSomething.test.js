@@ -31,14 +31,15 @@ test('doSomething with no return value', () => {
   expect(mockCallback.mock.results[1].value).toBeUndefined()
 })
 
-test('doSomething with function argument in mock setup', () => {
+test('doSomething with mock implementation parameter', () => {
+  // pass mock implementation function into jest.fn
   const mockCallback = jest.fn(() => 'Hello')
   doSomething(mockCallback)
   expect(mockCallback).toHaveNthReturnedWith(1, 'Hello')
   expect(mockCallback).toHaveNthReturnedWith(2, 'Hello')
 })
 
-test('doSomething with function argument in mock setup and catching the values passed into mockCallback', () => {
+test('doSomething with mock implementation parameter that catches the values passed into mockCallback', () => {
   const mockCallback = jest.fn((value) => 'Hello ' + value)
   doSomething(mockCallback)
   expect(mockCallback).toHaveNthReturnedWith(1, 'Hello foo')
@@ -51,24 +52,6 @@ test('doSomething with .mockReturnValue() on mock', () => {
   doSomething(mockCallback)
   expect(mockCallback).toHaveNthReturnedWith(1, 'Hello')
   expect(mockCallback).toHaveNthReturnedWith(2, 'Hello')
-})
-
-function doSomethingElse(callback){
-  const list = [1,2,3,4]
-  list.forEach(item => callback(item))
-}
-
-test('doSomethingELSE with .mockReturnValueOnce() on mock', () => {
-  const mockCallback = jest
-    .fn()
-    .mockReturnValue('default')
-    .mockReturnValueOnce('value 1')
-    .mockReturnValueOnce('value 2')
-  doSomethingElse(mockCallback)
-  expect(mockCallback).toHaveNthReturnedWith(1, 'value 1')
-  expect(mockCallback).toHaveNthReturnedWith(2, 'value 2')
-  expect(mockCallback).toHaveNthReturnedWith(3, 'default')
-  expect(mockCallback).toHaveNthReturnedWith(3, 'default')
 })
 
 test('doSomething with .mockImplementation() on mock', () => {
