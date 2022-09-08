@@ -1,4 +1,4 @@
-Components and tests for the article series Jest mocking + React on [dev.to](URL)
+Components and tests for the article series Jest mocking + React on [dev.to](https://dev.to/peterlidee/series/19703)
 
 Components and function can be found in src/partX.
 
